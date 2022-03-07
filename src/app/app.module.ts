@@ -3,14 +3,33 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { IonicStorageModule } from '@ionic/storage-angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { EffectsModule } from '@ngrx/effects';
+import { ActionReducerMap, StoreModule } from '@ngrx/store';
+
+import * as AuthenticationReducers from './state/authentication/authentication-reducer';
+import { RootStoreEffects } from './state/root-store-effect';
+import { HttpClientModule } from '@angular/common/http';
+
+export const reducers: ActionReducerMap<any> = {
+  Authentication: AuthenticationReducers.AuthenticationStoreReducer
+};
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [
+    BrowserModule, 
+    HttpClientModule,
+    IonicModule.forRoot(), 
+    AppRoutingModule, 
+    IonicStorageModule.forRoot(),
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot(RootStoreEffects)
+  ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
