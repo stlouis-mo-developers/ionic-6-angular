@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserData } from '../../providers/user-data';
-import { UserOptions } from '../../interfaces/user-options';
+import { UserOptions } from '../../models/user-options';
 import { Store, ActionsSubject } from '@ngrx/store';
 import { RootStoreState } from '../../state/root-store-state';
 import * as AuthenticationActions from '../../state/authentication/authentication-action';
