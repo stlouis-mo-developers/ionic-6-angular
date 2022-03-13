@@ -71,7 +71,7 @@ export class AccountPage implements AfterViewInit {
     this.router.navigateByUrl('/login');
   }
 
-  support() {
-    this.router.navigateByUrl('/support');
+  about() {
+    this.router.navigateByUrl('/about');
   }
 }

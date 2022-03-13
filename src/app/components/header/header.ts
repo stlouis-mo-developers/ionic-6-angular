@@ -35,13 +35,6 @@ export class Header implements OnInit{
       console.log({ 'login success changes': data });
       this.presentOKAlert('You are logged-in ...');
     });
-
-    //optional event notifications 
-    /*
-    this.eventSubscription = this.events.event$.subscribe((item:any) => {
-      console.log({item: item});
-    });
-    */
   }
 
   ngOnDestroy() {

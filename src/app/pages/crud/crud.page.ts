@@ -49,9 +49,7 @@ export class CrudPage implements OnInit {
   }
 
   listenForLoginEvents() {
-    window.addEventListener('user:login', () => {
       this.updateLoggedInStatus(true);
-    });
   }
 
   getPageData(){

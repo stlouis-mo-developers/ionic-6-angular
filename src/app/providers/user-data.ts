@@ -35,7 +35,7 @@ export class UserData {
     const username = login.username;
     return this.storage.set(this.HAS_LOGGED_IN, true).then(() => {
       this.setUsername(username);
-      return window.dispatchEvent(new CustomEvent('user:login'));
+      //return window.dispatchEvent(new CustomEvent('user:login'));
     });
   }
 
@@ -48,7 +48,7 @@ export class UserData {
       authenticated = true;
       const promiseResult = this.storage.set(this.HAS_LOGGED_IN, true).then(() => {
         this.setUsername(username);
-        return window.dispatchEvent(new CustomEvent('user:login'));
+        //return window.dispatchEvent(new CustomEvent('user:login'));
       });
     }
     return of(authenticated);
@@ -56,7 +56,7 @@ export class UserData {
   signup(username: string): Promise<any> {
     return this.storage.set(this.HAS_LOGGED_IN, true).then(() => {
       this.setUsername(username);
-      return window.dispatchEvent(new CustomEvent('user:signup'));
+      //return window.dispatchEvent(new CustomEvent('user:signup'));
     });
   }
 
@@ -64,7 +64,7 @@ export class UserData {
     return this.storage.remove(this.HAS_LOGGED_IN).then(() => {
       return this.storage.remove('username');
     }).then(() => {
-      window.dispatchEvent(new CustomEvent('user:logout'));
+      //window.dispatchEvent(new CustomEvent('user:logout'));
     });
   }
 

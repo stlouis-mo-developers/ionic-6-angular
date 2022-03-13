@@ -38,7 +38,7 @@ export class LoginPage {
       ofType<AuthenticationActions.GetFailureAction>(AuthenticationActions.ActionTypes.GET_FAILURE)
     ).subscribe(data => {
       console.log({ 'login failure changes': data });
-      this.loggedIn = true;
+      this.loggedIn = false;
       this.presentAlert();
     });
   }
@@ -68,9 +68,7 @@ export class LoginPage {
 
     if (form.valid) {
       const user = new Authentication(this.login.username, this.login.password);
-      //this.userData.login(user);
       this.store.dispatch(new AuthenticationActions.GetRequestAction(user));
-      //this.router.navigateByUrl('/crud');
     }
   }
 
