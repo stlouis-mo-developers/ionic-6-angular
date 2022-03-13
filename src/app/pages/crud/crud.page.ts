@@ -15,7 +15,7 @@ export class CrudPage implements OnInit {
 
   constructor(
     public menu: MenuController,
-    private UserProvider: UserProvider,
+    private userProvider: UserProvider,
     private router: Router,
   ) { }
 
@@ -37,7 +37,7 @@ export class CrudPage implements OnInit {
 
 
   checkLoginStatus() {
-    return this.UserProvider.isLoggedIn().then(loggedIn => {
+    return this.userProvider.isLoggedIn().then(loggedIn => {
       return this.updateLoggedInStatus(loggedIn);
     });
   }
@@ -60,31 +60,7 @@ export class CrudPage implements OnInit {
       item: {id: '',
       username: ''
       },
-      formData: [{
-        id: '1',
-        username: 'Johhny Rocket',
-        emailaddress: "",
-        done: false,
-        date: new Date()
-      }, {
-        id: '2',
-        username: 'Jekyll Hyde',
-        emailaddress: "",
-        done: false,
-        date: new Date()
-      }, {
-        id: '3',
-        username: 'Storm Trooper',
-        emailaddress: "",
-        done: false,
-        date: new Date()
-      }, {
-        id: '4',
-        username: 'Lennox Lewis',
-        emailaddress: "",
-        done: false,
-        date: new Date()
-      }]
+      formData: this.userProvider.getUsers()
     };
   }
 

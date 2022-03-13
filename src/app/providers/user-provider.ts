@@ -8,27 +8,57 @@ import { Observable, from, of } from 'rxjs';
   providedIn: 'root'
 })
 export class UserProvider {
-  _favorites: string[] = [];
   HAS_LOGGED_IN = 'hasLoggedIn';
   HAS_SEEN_TUTORIAL = 'hasSeenTutorial';
+
+  _users: Array<any> = [{
+    id: '1',
+    username: 'Johhny Rocket',
+    emailaddress: "",
+    done: false,
+    date: new Date()
+  }, {
+    id: '2',
+    username: 'Jekyll Hyde',
+    emailaddress: "",
+    done: false,
+    date: new Date()
+  }, {
+    id: '3',
+    username: 'Storm Trooper',
+    emailaddress: "",
+    done: false,
+    date: new Date()
+  }, {
+    id: '4',
+    username: 'Lennox Lewis',
+    emailaddress: "",
+    done: false,
+    date: new Date()
+  }];
+
 
   constructor(
     public storage: StorageService
   ) { }
 
-  hasFavorite(sessionName: string): boolean {
-    return (this._favorites.indexOf(sessionName) > -1);
+  hasUser(user: any): boolean {
+    return (this._users.indexOf(user) > -1);
   }
 
-  addFavorite(sessionName: string): void {
-    this._favorites.push(sessionName);
+  addUser(user: any): void {
+    this._users.push(user);
   }
 
-  removeFavorite(sessionName: string): void {
-    const index = this._favorites.indexOf(sessionName);
+  removeUser(user: any): void {
+    const index = this._users.indexOf(user);
     if (index > -1) {
-      this._favorites.splice(index, 1);
+      this._users.splice(index, 1);
     }
+  }
+
+  getUsers(): Array<any> {
+    return this._users;
   }
 
   login(login: Authentication): Promise<any> {
