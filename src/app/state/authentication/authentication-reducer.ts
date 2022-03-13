@@ -1,5 +1,5 @@
 import * as AuthenticationActions from './authentication-action';
-import { RootStoreAction } from '../root-store-action';
+import { RootStoreAction } from '../root/root-store-action';
 import { initialAuthenticationState, AuthenticationState } from './authentication-state';
 
 export function AuthenticationStoreReducer(state = initialAuthenticationState, action: RootStoreAction): AuthenticationState {

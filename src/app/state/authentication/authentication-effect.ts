@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType, createEffect } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import * as AuthenticationActions from './authentication-action';
-import { UserData } from '../../providers/user-data';
+import { UserProvider } from '../../providers/user-provider';
 import { Observable, of as observableof, from } from 'rxjs';
 import { switchMap, map, tap } from 'rxjs/operators';
 import { catchError } from 'rxjs/internal/operators/catchError';
@@ -18,7 +18,7 @@ import { Router, Route } from '@angular/router';
 export class AuthenticationStoreEffects {
     constructor(
         private actions$: Actions,
-        private userService: UserData,
+        private userService: UserProvider,
         private http: HttpClient,
         private router: Router
     ) { }

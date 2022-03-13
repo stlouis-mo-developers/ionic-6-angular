@@ -11,7 +11,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { ActionReducerMap, StoreModule } from '@ngrx/store';
 
 import * as AuthenticationReducers from './state/authentication/authentication-reducer';
-import { RootStoreEffects } from './state/root-store-effect';
+import { RootStoreEffects } from './state/root//root-store-effect';
 import { HttpClientModule } from '@angular/common/http';
 
 export const reducers: ActionReducerMap<any> = {

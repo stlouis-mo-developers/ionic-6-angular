@@ -7,7 +7,7 @@ import { ofType } from "@ngrx/effects";
 import { ActionsSubject } from '@ngrx/store';
 
 import * as AuthenticationActions from '../../state/authentication/authentication-action';
-import { UserData } from '../../providers/user-data';
+import { UserProvider } from '../../providers/user-provider';
 
 
 @Component({
@@ -22,7 +22,7 @@ export class Header implements OnInit{
   eventSubscription = new Subscription();
 
   constructor(public router: Router,
-  public userData: UserData,
+  public UserProvider: UserProvider,
   private loginActionsSubject: ActionsSubject,
   public alert: AlertController ) { 
   }
@@ -53,7 +53,7 @@ export class Header implements OnInit{
   }
 
   checkLoginStatus() {
-    return this.userData.isLoggedIn().then(loggedIn => {
+    return this.UserProvider.isLoggedIn().then(loggedIn => {
       console.log({loggedIn: loggedIn});
       return this.updateLoggedInStatus(loggedIn);
     });
@@ -70,7 +70,7 @@ export class Header implements OnInit{
   }
 
   logout (){
-    this.userData.logout().then(loggedIn => {
+    this.UserProvider.logout().then(loggedIn => {
       return this.router.navigateByUrl('/login');
     });
   }

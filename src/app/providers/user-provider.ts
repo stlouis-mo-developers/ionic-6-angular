@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { StorageService } from '../services/StorageService';
+import { StorageService } from '../services/storage-service';
 import { Authentication } from '../models/authentication';
 import { Observable, from, of } from 'rxjs';
 
@@ -7,7 +7,7 @@ import { Observable, from, of } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class UserData {
+export class UserProvider {
   _favorites: string[] = [];
   HAS_LOGGED_IN = 'hasLoggedIn';
   HAS_SEEN_TUTORIAL = 'hasSeenTutorial';

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MenuController, IonSlides } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { UserData } from '../../providers/user-data';
+import { UserProvider } from '../../providers/user-provider';
 
 @Component({
   selector: 'page-crud',
@@ -15,7 +15,7 @@ export class CrudPage implements OnInit {
 
   constructor(
     public menu: MenuController,
-    private userData: UserData,
+    private UserProvider: UserProvider,
     private router: Router,
   ) { }
 
@@ -37,7 +37,7 @@ export class CrudPage implements OnInit {
 
 
   checkLoginStatus() {
-    return this.userData.isLoggedIn().then(loggedIn => {
+    return this.UserProvider.isLoggedIn().then(loggedIn => {
       return this.updateLoggedInStatus(loggedIn);
     });
   }

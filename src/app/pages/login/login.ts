@@ -1,10 +1,10 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserData } from '../../providers/user-data';
+import { UserProvider } from '../../providers/user-provider';
 import { UserOptions } from '../../models/user-options';
 import { Store, ActionsSubject } from '@ngrx/store';
-import { RootStoreState } from '../../state/root-store-state';
+import { RootStoreState } from '../../state/root/root-store-state';
 import * as AuthenticationActions from '../../state/authentication/authentication-action';
 import { MenuController } from '@ionic/angular';
 
@@ -27,7 +27,7 @@ export class LoginPage {
   loginSubscription = new Subscription();
 
   constructor(
-    public userData: UserData,
+    public UserProvider: UserProvider,
     public router: Router,
     private store: Store<RootStoreState>,
     private loginActionsSubject: ActionsSubject,

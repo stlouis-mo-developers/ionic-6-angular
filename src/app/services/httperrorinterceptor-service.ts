@@ -10,7 +10,7 @@ import {
 
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-import { StorageService } from '../services/StorageService';
+import { StorageService } from './storage-service';
 
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
