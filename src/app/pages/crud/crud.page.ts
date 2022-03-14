@@ -66,17 +66,22 @@ export class CrudPage implements OnInit {
 
   onEditHandle(item){
     this.state.item = item;
+    this.userProvider.updateUser(item);
     this.state.edit = true;
   }
 
   onDeleteHandle(item){
     this.state.delete = true;
+    this.userProvider.removeUser(item);
+    this.getPageData();
+    /*
     for(let i = 0; i < this.state.formData.length; i++){
       if(item.id === this.state.formData[i].id){
         const sliced = this.state.formData.splice(i, 1);
         break;
       }
     }
+    */
   }
 
   onAddHandle(form:any){
@@ -96,9 +101,13 @@ export class CrudPage implements OnInit {
       if (this.state.item && this.state.item.id.length > 0) {
       }
       else{
+        this.userProvider.addUser({id: String((this.state.formData.length + 1)), username: this.state.item.username});
+        this.getPageData();
+        /*
         this.state.formData.push(
           {id: String((this.state.formData.length + 1)), username: this.state.item.username}
         );
+        */
       }
       this.onCancelHandle(form);
     }

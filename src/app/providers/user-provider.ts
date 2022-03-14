@@ -50,10 +50,33 @@ export class UserProvider {
     this._users.push(user);
   }
 
-  removeUser(user: any): void {
+  updateUser(user: any): void {
+    /*
     const index = this._users.indexOf(user);
     if (index > -1) {
       this._users.splice(index, 1);
+    }
+    */
+    for (let i = 0; i < this._users.length; i++) {
+      if (user.id === this._users[i].id) {
+        this._users[i] = user;
+        break;
+      }
+    }
+  }
+
+  removeUser(user: any): void {
+    /*
+    const index = this._users.indexOf(user);
+    if (index > -1) {
+      this._users.splice(index, 1);
+    }
+    */
+    for (let i = 0; i < this._users.length; i++) {
+      if (user.id === this._users[i].id) {
+        const sliced = this._users.splice(i, 1);
+        break;
+      }
     }
   }
 
