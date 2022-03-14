@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { MenuController, IonSlides } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { UserProvider } from '../../providers/user-provider';
+import { UserOptions } from 'src/app/models/user-options';
 
 @Component({
   selector: 'page-crud',
@@ -10,6 +11,7 @@ import { UserProvider } from '../../providers/user-provider';
   styleUrls: ['crud.page.scss'],
 })
 export class CrudPage implements OnInit {
+  private user: UserOptions = { id:'', username: '', emailaddress: '' };
   public state:any = [];
   public loggedIn = false;
 
@@ -57,11 +59,10 @@ export class CrudPage implements OnInit {
       edit: false,
       delete: false,
       add: false,
-      item: {id: '',
-      username: ''
-      },
+      item: this.user,
       formData: this.userProvider.getUsers()
     };
+    console.log({state: this.state})
   }
 
   onEditHandle(item){
@@ -85,7 +86,7 @@ export class CrudPage implements OnInit {
   }
 
   onAddHandle(form:any){
-    this.state.item = {id: '', username: ''};
+    this.state.item = this.user;
     this.state.add = true;
   }
 
@@ -97,18 +98,20 @@ export class CrudPage implements OnInit {
   }
 
   onSubmitHandle(form: NgForm) {
+    console.log({onSubmitHandle: {form:form, valid: form.valid, state: this.state}})
     if (form.valid) {
       if (this.state.item && this.state.item.id.length > 0) {
+        this.userProvider.updateUser(this.state.item);
       }
       else{
-        this.userProvider.addUser({id: String((this.state.formData.length + 1)), username: this.state.item.username});
-        this.getPageData();
+        this.userProvider.addUser({...this.state.item, id: String((this.state.formData.length + 1))});
         /*
         this.state.formData.push(
           {id: String((this.state.formData.length + 1)), username: this.state.item.username}
         );
         */
       }
+      this.getPageData();
       this.onCancelHandle(form);
     }
   }

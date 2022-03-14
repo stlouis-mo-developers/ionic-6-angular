@@ -96,7 +96,7 @@ export class UserProvider {
     console.log({ login: login });
     let authenticated = false;
     if ( (login.username && login.username.indexOf('@') > -1) && 
-          (login.password && login.password.length > 6) ) {
+          (login.emailaddress && login.emailaddress.length > 6) ) {
       const username = login.username;
       authenticated = true;
       const promiseResult = this.storage.set(this.HAS_LOGGED_IN, true).then(() => {

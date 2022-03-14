@@ -1,10 +1,10 @@
 export  class Authentication{
     public username: string;
-    public password: string;
+    public emailaddress: string;
     
-    constructor(username: string, password: string){
+    constructor(username: string, emailaddress: string){
         this.username = username;
-        this.password = password;
+        this.emailaddress = emailaddress;
     }
 
 }

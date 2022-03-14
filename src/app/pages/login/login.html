@@ -42,12 +42,12 @@
 
                   <ion-item>
                     <ion-label position="stacked" color="primary">Password</ion-label>
-                    <ion-input [(ngModel)]="login.password" name="password" type="password" #password="ngModel" required>
+                    <ion-input [(ngModel)]="login.emailaddress" name="emailaddress" type="emailaddress" #emailaddress="ngModel" required>
                     </ion-input>
                   </ion-item>
 
                   <ion-text color="danger">
-                    <p [hidden]="password.valid || submitted == false" class="ion-padding-start">
+                    <p [hidden]="emailaddress.valid || submitted == false" class="ion-padding-start">
                       Password is required
                     </p>
                   </ion-text>
@@ -67,7 +67,7 @@
           <ion-row *ngIf="!isValid">
             <ion-col size-xs="12">
               <div class="alert alert-danger" role="alert">
-                Your uername or password is invalid!
+                Your uername or emailaddress is invalid!
               </div>
             </ion-col>
           </ion-row>
