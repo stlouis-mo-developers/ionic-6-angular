@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { StorageService } from '../services/storage-service';
 import { Authentication } from '../models/authentication';
 import { Observable, from, of } from 'rxjs';
+import { UserOptions } from '../models/user-options';
 
 
 @Injectable({
@@ -11,30 +12,26 @@ export class UserProvider {
   HAS_LOGGED_IN = 'hasLoggedIn';
   HAS_SEEN_TUTORIAL = 'hasSeenTutorial';
 
-  _users: Array<any> = [{
+  _users: Array<UserOptions> = [{
     id: '1',
-    username: 'Johhny Rocket',
-    emailaddress: "",
-    done: false,
-    date: new Date()
+    username: 'admin',
+    emailaddress: "password",
+    
   }, {
     id: '2',
     username: 'Jekyll Hyde',
     emailaddress: "",
-    done: false,
-    date: new Date()
+    
   }, {
     id: '3',
     username: 'Storm Trooper',
     emailaddress: "",
-    done: false,
-    date: new Date()
+    
   }, {
     id: '4',
     username: 'Lennox Lewis',
     emailaddress: "",
-    done: false,
-    date: new Date()
+    
   }];
 
 
@@ -81,7 +78,9 @@ export class UserProvider {
   }
 
   getUsers(): Array<any> {
-    return this._users;
+    const sortedUsers =  (this._users && this._users.length > 0) ? this._users.sort( (a,b) => a.id > b.id ? -1 : 0) :
+    this._users;
+    return sortedUsers;
   }
 
   login(login: Authentication): Promise<any> {
@@ -95,20 +94,23 @@ export class UserProvider {
   loginObservable(login: Authentication): Observable<any> {
     console.log({ login: login });
     let authenticated = false;
-    if ( (login.username && login.username.indexOf('@') > -1) && 
-          (login.emailaddress && login.emailaddress.length > 6) ) {
-      const username = login.username;
-      authenticated = true;
-      const promiseResult = this.storage.set(this.HAS_LOGGED_IN, true).then(() => {
-        this.setUsername(username);
-        //return window.dispatchEvent(new CustomEvent('user:login'));
-      });
-    }
+    const loggedInUser = (login.username && login.emailaddress) ? 
+    this._users.filter( (user:UserOptions) => 
+    (user.username === login.username) && 
+    (user.emailaddress === login.emailaddress) )  : null;
+    const username = (loggedInUser && loggedInUser.length > 0) ? loggedInUser[0].username : null;
+    authenticated = (username && username.length > 0) ? true : false;
+    const promiseResult = this.storage.set(this.HAS_LOGGED_IN, true).then(() => {
+      this.setUsername(username);
+      //return window.dispatchEvent(new CustomEvent('user:login'));
+    });
+
     return of(authenticated);
   }
-  signup(username: string): Promise<any> {
+  signup(user: UserOptions): Promise<any> {
+    this.addUser(user);
     return this.storage.set(this.HAS_LOGGED_IN, true).then(() => {
-      this.setUsername(username);
+      this.setUsername(user.username);
       //return window.dispatchEvent(new CustomEvent('user:signup'));
     });
   }

@@ -24,7 +24,7 @@ export class SignupPage {
     this.submitted = true;
 
     if (form.valid) {
-      this.UserProvider.signup(this.signup.username);
+      this.UserProvider.signup(this.signup);
       this.router.navigateByUrl('/login');
     }
   }
